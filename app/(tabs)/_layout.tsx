@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { Activity, Trophy, Users, User } from 'lucide-react-native';
+import { Activity, Trophy, Users, User, Home } from 'lucide-react-native';
 
 export default function TabLayout() {
   return (
@@ -21,6 +21,15 @@ export default function TabLayout() {
           fontWeight: '500',
         },
       }}>
+      <Tabs.Screen
+        name="landing"
+        options={{
+          title: 'Home',
+          tabBarIcon: ({ size, color }) => (
+            <Home size={size} color={color} />
+          ),
+        }}
+      />
       <Tabs.Screen
         name="index"
         options={{
