@@ -2,8 +2,11 @@ import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Achievement } from '@/components/Achievement';
 import { Settings, CreditCard as Edit3, Share } from 'lucide-react-native';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function ProfileScreen() {
+  const { user, logout } = useAuth();
+
   const achievements = [
     { icon: '🏃', title: 'First 5K', description: 'Completed your first 5K run', earned: true },
     { icon: '💪', title: 'Strength Builder', description: '10 strength workouts completed', earned: true },
@@ -28,16 +31,16 @@ export default function ProfileScreen() {
           <View style={styles.avatar}>
             <Text style={styles.avatarText}>👤</Text>
           </View>
-          <Text style={styles.name}>John Doe</Text>
-          <Text style={styles.email}>john.doe@email.com</Text>
+          <Text style={styles.name}>{user?.name || 'User'}</Text>
+          <Text style={styles.email}>{user?.email || 'user@email.com'}</Text>
           <View style={styles.profileActions}>
             <Pressable style={styles.actionButton}>
               <Edit3 size={20} color="#007AFF" />
               <Text style={styles.actionText}>Edit Profile</Text>
             </Pressable>
-            <Pressable style={styles.actionButton}>
-              <Share size={20} color="#007AFF" />
-              <Text style={styles.actionText}>Share</Text>
+            <Pressable style={styles.actionButton} onPress={logout}>
+              <Settings size={20} color="#FF3B30" />
+              <Text style={[styles.actionText, { color: '#FF3B30' }]}>Logout</Text>
             </Pressable>
           </View>
         </View>
